@@ -53,8 +53,8 @@ class AdminSubcategoryTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('subcategories', [
-            'name' => 'New Subcat Test',
+        $this->assertDatabaseHas('subkriteria', [
+            'nama_subkriteria' => 'New Subcat Test',
             'category_id' => $this->category->id,
         ]);
     }
@@ -70,8 +70,8 @@ class AdminSubcategoryTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('subcategories', [
-            'name' => 'Updated Subcat',
+        $this->assertDatabaseHas('subkriteria', [
+            'nama_subkriteria' => 'Updated Subcat',
         ]);
     }
 
@@ -82,8 +82,8 @@ class AdminSubcategoryTest extends TestCase
         $response = $this->actingAs($this->admin)->delete(route('admin.subcategories.destroy', $subcategory->id));
 
         $response->assertRedirect();
-        $this->assertDatabaseMissing('subcategories', [
-            'id' => $subcategory->id,
+        $this->assertDatabaseMissing('subkriteria', [
+            'id_subkriteria' => $subcategory->id,
         ]);
     }
 }

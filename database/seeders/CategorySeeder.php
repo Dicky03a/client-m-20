@@ -16,7 +16,10 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
-            Category::firstOrCreate(['name' => $category['name']], $category);
+            $existing = Category::where('nama_kriteria', $category['name'])->first();
+            if (!$existing) {
+                Category::create($category);
+            }
         }
     }
 }

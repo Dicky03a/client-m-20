@@ -10,22 +10,30 @@ class SubcategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $technology = Category::where('name', 'Teknologi')->first();
+        $technology = Category::where('nama_kriteria', 'Teknologi')->first();
         if ($technology) {
-            Subcategory::firstOrCreate(['name' => 'Pemrograman'], ['category_id' => $technology->id, 'description' => 'Subkategori pemrograman komputer basic ke advance']);
-            Subcategory::firstOrCreate(['name' => 'Jaringan'], ['category_id' => $technology->id, 'description' => 'Subkategori jaringan nirkabel dan berbayar']);
+            $this->createSubcategory('Pemrograman', $technology->id_kriteria, 'Subkategori pemrograman komputer basic ke advance');
+            $this->createSubcategory('Jaringan', $technology->id_kriteria, 'Subkategori jaringan nirkabel dan berbayar');
         }
 
-        $business = Category::where('name', 'Bisnis')->first();
+        $business = Category::where('nama_kriteria', 'Bisnis')->first();
         if ($business) {
-            Subcategory::firstOrCreate(['name' => 'Marketing'], ['category_id' => $business->id, 'description' => 'Subkategori edukasi marketing untuk B2B Sales']);
-            Subcategory::firstOrCreate(['name' => 'Keuangan'], ['category_id' => $business->id, 'description' => 'Subkategori keuangan perbankan atau desentralisasi']);
+            $this->createSubcategory('Marketing', $business->id_kriteria, 'Subkategori edukasi marketing untuk B2B Sales');
+            $this->createSubcategory('Keuangan', $business->id_kriteria, 'Subkategori keuangan perbankan atau desentralisasi');
         }
         
-        $design = Category::where('name', 'Desain')->first();
+        $design = Category::where('nama_kriteria', 'Desain')->first();
         if ($design) {
-            Subcategory::firstOrCreate(['name' => 'UI/UX'], ['category_id' => $design->id, 'description' => 'Subkategori perancangan UI/UX Desain Sistem']);
-            Subcategory::firstOrCreate(['name' => 'Ilustrasi'], ['category_id' => $design->id, 'description' => 'Subkategori perancangan Vector Ilustrasi']);
+            $this->createSubcategory('UI/UX', $design->id_kriteria, 'Subkategori perancangan UI/UX Desain Sistem');
+            $this->createSubcategory('Ilustrasi', $design->id_kriteria, 'Subkategori perancangan Vector Ilustrasi');
+        }
+    }
+
+    private function createSubcategory($name, $categoryId, $description)
+    {
+        $existing = Subcategory::where('nama_subkriteria', $name)->where('category_id', $categoryId)->first();
+        if (!$existing) {
+            Subcategory::create(['name' => $name, 'category_id' => $categoryId, 'description' => $description]);
         }
     }
 }

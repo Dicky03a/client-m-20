@@ -10,6 +10,8 @@ class Submission extends Model
 {
     use HasFactory;
 
+    protected $table = 'pengisian';
+
     protected $fillable = [
         'user_id',
         'subcategory_id',
@@ -23,7 +25,7 @@ class Submission extends Model
 
     public function subcategory(): BelongsTo
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Subcategory::class, 'subcategory_id', 'id_subkriteria');
     }
 
     public function userFile(): BelongsTo

@@ -48,8 +48,8 @@ class AdminCategoryTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('categories', [
-            'name' => 'New Category Test',
+        $this->assertDatabaseHas('kriteria', [
+            'nama_kriteria' => 'New Category Test',
         ]);
     }
 
@@ -63,8 +63,8 @@ class AdminCategoryTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $this->assertDatabaseHas('categories', [
-            'name' => 'Updated Category',
+        $this->assertDatabaseHas('kriteria', [
+            'nama_kriteria' => 'Updated Category',
         ]);
     }
 
@@ -75,8 +75,8 @@ class AdminCategoryTest extends TestCase
         $response = $this->actingAs($this->admin)->delete(route('admin.categories.destroy', $category->id));
 
         $response->assertRedirect();
-        $this->assertDatabaseMissing('categories', [
-            'id' => $category->id,
+        $this->assertDatabaseMissing('kriteria', [
+            'id_kriteria' => $category->id,
         ]);
     }
 }

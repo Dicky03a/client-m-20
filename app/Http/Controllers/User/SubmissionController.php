@@ -18,10 +18,10 @@ class SubmissionController extends Controller
         $userId = $request->user()->id;
         
         $submissionsCount = Submission::where('user_id', $userId)
-            ->selectRaw('categories.id as category_id, count(submissions.id) as count')
-            ->join('subcategories', 'subcategories.id', '=', 'submissions.subcategory_id')
-            ->join('categories', 'categories.id', '=', 'subcategories.category_id')
-            ->groupBy('categories.id')
+            ->selectRaw('kriteria.id_kriteria as category_id, count(pengisian.id) as count')
+            ->join('subkriteria', 'subkriteria.id_subkriteria', '=', 'pengisian.subcategory_id')
+            ->join('kriteria', 'kriteria.id_kriteria', '=', 'subkriteria.category_id')
+            ->groupBy('kriteria.id_kriteria')
             ->pluck('count', 'category_id');
 
         $categories->transform(function ($category) use ($submissionsCount) {
